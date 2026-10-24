@@ -1,0 +1,1010 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Катерина Качур — веб-дизайнерка</title>
+<meta name="description" content="Катерина Качур — веб-дизайнерка. Дизайн у Figma і розробка сайтів у Webflow, Readymag або Claude Code: лендинги, багатосторінкові сайти й редизайн.">
+<link rel="canonical" href="https://kateriis.github.io/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="uk_UA">
+<meta property="og:title" content="Катерина Качур — веб-дизайнерка">
+<meta property="og:description" content="Вас оцінюють за перші 3 секунди. Я роблю так, щоб вони працювали на вас.">
+<meta property="og:url" content="https://kateriis.github.io/">
+<meta property="og:image" content="https://kateriis.github.io/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#eaeaea">
+<style>
+  html { -webkit-text-size-adjust: 100%; }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500&display=swap">
+<style>
+/* Layout: name across the full width in two lines, the colour photo as a card
+   in front of the letters, copy on the left and facts on the right below it.
+   Tokens follow Kateryna's brandbook (light only). */
+:root {
+  --bg: #eaeaea;
+  --surface: #ffffff;
+  --surface-2: #f6f6f7;
+  --ink: #000000;
+  --ink-70: rgba(0, 0, 0, .7);
+  --ink-50: rgba(0, 0, 0, .6);
+  --line: rgba(0, 0, 0, .1);
+  --accent: #49010c;
+  --on-accent: #ffffff;
+
+  --display: "Inter", system-ui, -apple-system, sans-serif;
+  --sans: "Inter", system-ui, -apple-system, sans-serif;
+  --tight: "Inter Tight", "Inter", system-ui, sans-serif;
+
+  --r-md: 8px;
+  --r-lg: 16px;
+  --button-h: 48px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --gutter: 16px;
+  color-scheme: light;
+}
+@media (min-width: 700px)  { :root { --gutter: 32px; } }
+@media (min-width: 1024px) { :root { --gutter: 48px; } }
+@media (min-width: 1440px) { :root { --gutter: 80px; } }
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 500 16px/1.2 var(--sans);
+  letter-spacing: -.05em;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: var(--r-md); }
+
+.page {
+  max-width: 1760px;
+  margin: 0 auto;
+  padding-left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
+}
+
+/* ---------- topbar ---------- */
+.topbar {
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  height: 68px;
+  border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand svg { height: 20px; width: auto; display: block; }
+.brand .sep { width: 1px; height: 20px; background: var(--line); }
+.eyebrow {
+  font: 500 13px/1 var(--tight);
+  text-transform: uppercase;
+  letter-spacing: -.03em;
+}
+.links { display: flex; gap: 32px; }
+.links a { color: var(--ink-70); transition: color .3s var(--ease); }
+.links a:hover { color: var(--ink); }
+
+.burger {
+  display: none; position: relative; z-index: 31;
+  width: var(--button-h); height: var(--button-h); padding: 0; border: 0; cursor: pointer;
+  border-radius: var(--r-md); background: var(--surface); color: var(--ink);
+}
+.burger i { position: absolute; left: 15px; right: 15px; height: 1.6px; background: currentColor; transition: transform .35s var(--ease), top .35s var(--ease); }
+.burger i:first-child { top: 19px; } .burger i:last-child { top: 27px; }
+.burger[aria-expanded="true"] { background: var(--ink); color: var(--surface); }
+.burger[aria-expanded="true"] i:first-child { top: 23px; transform: rotate(45deg); }
+.burger[aria-expanded="true"] i:last-child { top: 23px; transform: rotate(-45deg); }
+.burger:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.menu {
+  position: fixed; inset: 0; z-index: 30;
+  display: grid; grid-template-rows: 1fr auto; gap: 32px;
+  padding-top: calc(88px + env(safe-area-inset-top, 0px));
+  padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
+  padding-left: inherit; padding-right: inherit;
+  background: var(--bg); overflow-y: auto;
+}
+.menu[hidden] { display: none; }
+.menu-links { display: grid; align-content: start; border-top: 1px solid var(--line); }
+.menu-links a {
+  display: flex; align-items: baseline; gap: 16px; padding-block: 18px; border-bottom: 1px solid var(--line);
+  font: 500 clamp(34px, 9vw, 64px)/.9 var(--display); letter-spacing: -.05em; text-transform: uppercase;
+}
+.menu-links span { font: 500 13px/1 var(--tight); letter-spacing: -.03em; color: var(--ink-50); min-width: 22px; }
+.menu-foot { display: grid; gap: 20px; justify-items: start; }
+.menu-tg { color: var(--ink-70); }
+@media (prefers-reduced-motion: no-preference) {
+  .menu:not([hidden]) .menu-links a { animation: appear .55s var(--ease) both; }
+  .menu:not([hidden]) .menu-links a:nth-child(2) { animation-delay: .04s; }
+  .menu:not([hidden]) .menu-links a:nth-child(3) { animation-delay: .08s; }
+  .menu:not([hidden]) .menu-links a:nth-child(4) { animation-delay: .12s; }
+  .menu:not([hidden]) .menu-links a:nth-child(5) { animation-delay: .16s; }
+  .menu:not([hidden]) .menu-links a:nth-child(6) { animation-delay: .2s; }
+}
+body.menu-open { overflow: hidden; }
+.topbar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 31;
+  background: var(--bg);
+  box-shadow: 0 0 0 100vmax var(--bg); clip-path: inset(0 -100vmax);
+}
+html { scroll-padding-top: 1.75rem; }
+@media (max-width: 899px) { html { scroll-padding-top: 3.625rem; } }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+/* ---------- button: label + arrow square, 2px apart ---------- */
+.btn { display: inline-flex; gap: 2px; height: var(--button-h); }
+.btn > span {
+  display: inline-flex; align-items: center;
+  border-radius: var(--r-md);
+  background: var(--ink); color: var(--surface);
+  transition: background .3s var(--ease);
+}
+.btn .label { padding: 0 22px; font: 500 15px/1 var(--tight); letter-spacing: .02em; text-transform: uppercase; }
+.btn .arrow { width: var(--button-h); justify-content: center; }
+.btn .arrow svg { width: 18px; height: 18px; transition: transform .3s var(--ease); }
+.btn:hover .arrow svg { transform: translateX(3px); }
+.btn--ghost > span { background: var(--surface); color: var(--ink); }
+.btn--ghost:hover > span { background: var(--surface-2); }
+.btn--ghost:hover .arrow svg { transform: translate(2px, -2px); }
+
+/* ---------- hero ---------- */
+.hero { container-type: inline-size; padding-block: 28px 56px; }
+.stage { position: relative; }
+.name {
+  margin: 0;
+  font: 700 18.6cqw/.88 var(--display);
+  letter-spacing: -.05em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+.name span { display: block; white-space: nowrap; }
+.name .l1 { margin-left: -.05em; }
+.name .l2 { text-align: right; margin-right: -.02em; }
+
+.photo {
+  position: absolute;
+  left: 38cqw; top: 6.5cqw;
+  width: 24cqw;
+  aspect-ratio: 4 / 5;
+  max-width: 100%;
+  margin: 0;
+  z-index: 2;
+}
+.photo img {
+  width: 100%; height: 100%; display: block;
+  object-fit: cover;
+  border-radius: var(--r-lg);
+  background: var(--accent);
+}
+.photo figcaption {
+  position: absolute; left: 12px; top: 12px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 11px;
+}
+
+.below {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 24cqw minmax(0, 1fr);
+  column-gap: 4cqw;
+  margin-top: 40px;
+  align-items: end;
+}
+.copy { display: grid; gap: 24px; justify-items: start; }
+.copy .eyebrow { color: var(--ink-50); }
+.lead {
+  margin: 0;
+  font: 500 clamp(24px, 2.3cqw, 34px)/1.12 var(--sans);
+  letter-spacing: -.05em;
+  max-width: 22ch;
+  text-wrap: balance;
+}
+.lead b { font-weight: 700; color: var(--accent); }
+.sub { margin: 0; font-size: 20px; color: var(--ink-70); max-width: 34ch; }
+
+.facts {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 8px;
+  justify-self: end; width: min(100%, 360px);
+}
+.fact {
+  display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 16px;
+  padding: 16px 18px;
+  background: var(--surface);
+  border-radius: var(--r-md);
+}
+.fact strong { font: 700 26px/1 var(--display); letter-spacing: -.05em; text-transform: uppercase; white-space: nowrap; }
+.fact span { color: var(--ink-50); font-size: 15px; }
+
+/* ---------- portfolio ---------- */
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.work { padding-block: 96px 120px; border-top: 1px solid var(--line); display: grid; gap: 96px; }
+.work-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: end; }
+.work-title { display: grid; gap: 20px; }
+.work-title .eyebrow { color: var(--ink-50); }
+.work-title h2 {
+  margin: 0;
+  font: 700 clamp(44px, 6.2vw, 112px)/.88 var(--display);
+  letter-spacing: -.05em; text-transform: uppercase;
+  text-wrap: balance;
+}
+.work-intro { margin: 0; justify-self: end; max-width: 30ch; font-size: 20px; color: var(--ink-70); }
+
+.case { display: grid; gap: 24px; }
+.case-top {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: baseline; gap: 20px;
+  padding-top: 20px; border-top: 1px solid var(--line);
+}
+.case-num { font: 700 26px/1 var(--display); letter-spacing: -.05em; color: var(--ink-50); font-variant-numeric: tabular-nums; }
+.case-name { margin: 0; font: 500 clamp(32px, 3.4vw, 56px)/.88 var(--display); letter-spacing: -.05em; text-transform: uppercase; }
+.case-meta { margin: 0; color: var(--ink-70); display: flex; flex-wrap: wrap; align-items: center; gap: 10px; justify-content: flex-end; }
+.case-meta i { width: 1px; height: 12px; background: var(--line); }
+
+.shots { display: grid; grid-template-columns: 1.6fr .462fr; gap: 8px; }
+.shots img { width: 100%; height: auto; display: block; border-radius: var(--r-lg); background: var(--surface); }
+
+.compare { position: relative; border-radius: var(--r-lg); overflow: hidden; aspect-ratio: 16 / 10; max-width: 100%; background: var(--surface); }
+.compare > img, .compare-before img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.compare-before { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+.compare-before::after { content: ""; position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: var(--surface); }
+.compare-handle {
+  position: absolute; top: 50%; left: var(--pos);
+  width: var(--button-h); height: var(--button-h); margin: -24px 0 0 -24px;
+  display: grid; place-items: center;
+  border-radius: var(--r-md); background: var(--surface); color: var(--ink);
+  pointer-events: none;
+}
+.compare-handle svg { width: 18px; height: 18px; }
+.compare-tag { position: absolute; top: 16px; padding: 8px 12px; border-radius: 999px; background: var(--surface); font-size: 11px; pointer-events: none; }
+.compare-tag.is-before { left: 16px; }
+.compare-tag.is-after { right: 16px; }
+.compare-range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
+.compare:has(.compare-range:focus-visible) .compare-handle { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+.case-info {
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) auto; gap: 32px; align-items: start;
+}
+.case-text { margin: 0; font-size: 20px; color: var(--ink-70); max-width: 44ch; }
+.case-fact { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: center; max-width: 24ch; }
+.case-fact strong { font: 700 56px/.88 var(--display); letter-spacing: -.05em; }
+.case-fact span { color: var(--ink-70); }
+.quote { margin: 0; display: grid; gap: 12px; padding: 20px 22px; background: var(--surface); border-radius: var(--r-md); }
+.quote p { margin: 0; font-size: 20px; }
+.quote cite { font: 500 13px/1 var(--tight); font-style: normal; text-transform: uppercase; letter-spacing: -.03em; color: var(--ink-50); }
+.case-status { color: var(--ink-50); white-space: nowrap; padding-top: 6px; }
+.case-action { justify-self: end; }
+
+/* ---------- services ---------- */
+.services { padding-block: 96px 120px; border-top: 1px solid var(--line); display: grid; gap: 64px; }
+.svc-list { border-top: 1px solid var(--line); }
+.svc { border-bottom: 1px solid var(--line); }
+.svc summary {
+  list-style: none; cursor: pointer;
+  display: grid; grid-template-columns: 56px minmax(0, 1fr) auto var(--button-h); align-items: center; gap: 24px;
+  padding-block: 24px;
+}
+.svc summary::-webkit-details-marker { display: none; }
+.svc summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; border-radius: var(--r-md); }
+.svc-num { font: 700 26px/1 var(--display); letter-spacing: -.05em; color: var(--ink-50); font-variant-numeric: tabular-nums; }
+.svc-name { font: 500 clamp(28px, 3.4vw, 56px)/.88 var(--display); letter-spacing: -.05em; text-transform: uppercase; }
+.svc-price { font: 500 clamp(20px, 2vw, 28px)/1 var(--sans); letter-spacing: -.05em; white-space: nowrap; }
+.svc-toggle {
+  position: relative; width: var(--button-h); height: var(--button-h);
+  border-radius: var(--r-md); background: var(--surface);
+  transition: background .3s var(--ease);
+}
+.svc-toggle::before, .svc-toggle::after {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 16px; height: 1.6px; margin: -.8px 0 0 -8px;
+  background: var(--ink); transition: transform .3s var(--ease);
+}
+.svc-toggle::after { transform: rotate(90deg); }
+.svc[open] .svc-toggle { background: var(--ink); }
+.svc[open] .svc-toggle::before, .svc[open] .svc-toggle::after { background: var(--surface); }
+.svc[open] .svc-toggle::after { transform: rotate(0deg); }
+.svc summary:hover .svc-toggle { background: var(--surface-2); }
+.svc[open] summary:hover .svc-toggle { background: var(--ink); }
+.svc-body {
+  display: grid; grid-template-columns: 56px minmax(0, 1fr) minmax(0, 1fr); gap: 24px;
+  padding-bottom: 32px;
+}
+.svc-body p { grid-column: 2; margin: 0; font-size: 20px; color: var(--ink-70); max-width: 36ch; }
+.svc-body ul { grid-column: 3; margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.svc-body li { padding: 12px 16px; background: var(--surface); border-radius: var(--r-md); }
+@media (prefers-reduced-motion: no-preference) {
+  .svc[open] .svc-body { animation: appear .55s var(--ease) both; }
+}
+.svc-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; }
+.svc-foot p { margin: 0; font-size: 20px; color: var(--ink-70); max-width: 44ch; }
+
+/* ---------- process: stair of square cards on a grid ---------- */
+.process { padding-block: 96px 120px; border-top: 1px solid var(--line); display: grid; gap: 40px; }
+.process-term { margin: 0; justify-self: end; display: grid; grid-template-columns: auto minmax(0, 18ch); gap: 16px; align-items: center; }
+.process-term strong { font: 700 clamp(40px, 4.4vw, 72px)/.88 var(--display); letter-spacing: -.05em; white-space: nowrap; }
+.process-term span { font-size: 20px; color: var(--ink-70); }
+.st-hint { margin: 0; display: inline-flex; align-items: center; gap: 10px; justify-self: start; color: var(--ink-50); font: 500 13px/1 var(--tight); text-transform: uppercase; letter-spacing: -.03em; }
+.stairs {
+  --cols: 4;
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); grid-auto-rows: auto;
+  border-top: 1px solid var(--line); border-left: 1px solid var(--line);
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: calc(100% / var(--cols)) calc(100% / 3);
+  background-position: -1px -1px;
+}
+.st { min-width: 0; aspect-ratio: 4 / 3; padding: 8px; }
+.st--1 { grid-column: 1; grid-row: 1; } .st--2 { grid-column: 2; grid-row: 1; }
+.st--3 { grid-column: 2; grid-row: 2; } .st--4 { grid-column: 3; grid-row: 2; }
+.st--5 { grid-column: 3; grid-row: 3; } .st--6 { grid-column: 4; grid-row: 3; }
+.st-card {
+  position: relative; width: 100%; height: 100%;
+  display: grid; grid-template-rows: auto 1fr auto; align-items: start; text-align: left;
+  padding: 20px; border: 0; border-radius: var(--r-lg);
+  background: var(--surface); color: var(--ink);
+  font: inherit; letter-spacing: inherit; cursor: pointer;
+  transition: background .35s var(--ease), color .35s var(--ease);
+}
+.st-card:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.st-num { font: 500 13px/1 var(--tight); letter-spacing: -.03em; color: var(--ink-50); font-variant-numeric: tabular-nums; }
+.st-title { align-self: start; margin-top: 14px; font: 500 clamp(26px, 2.9vw, 48px)/.9 var(--display); letter-spacing: -.05em; text-transform: uppercase; }
+.st-text { display: none; align-self: end; font-size: 14px; line-height: 1.3; max-width: 34ch; }
+.st-plus {
+  position: relative; justify-self: end; align-self: end;
+  width: 40px; height: 40px; border-radius: var(--r-md); background: var(--bg);
+  transition: background .3s var(--ease), transform .35s var(--ease);
+}
+.st-plus::before, .st-plus::after {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 14px; height: 1.6px; margin: -.8px 0 0 -7px; background: var(--ink);
+  transition: transform .35s var(--ease);
+}
+.st-plus::after { transform: rotate(90deg); }
+.st-card .st-plus { position: absolute; right: 16px; bottom: 16px; }
+.st-plus--mini { width: 24px; height: 24px; border-radius: 6px; background: var(--surface); }
+.st-plus--mini::before, .st-plus--mini::after { width: 10px; margin-left: -5px; }
+.st-card:hover .st-plus { background: var(--surface-2); }
+.st-card[aria-expanded="true"] { background: var(--ink); color: var(--surface); }
+.st-card[aria-expanded="true"] .st-num { color: rgba(255, 255, 255, .6); }
+.st-card[aria-expanded="true"] .st-title { font-size: clamp(22px, 1.8vw, 30px); }
+.st-card[aria-expanded="true"] .st-text { display: block; color: rgba(255, 255, 255, .8); }
+.st-card[aria-expanded="true"] .st-plus { bottom: auto; top: 16px; }
+.st-card[aria-expanded="true"] .st-plus { background: rgba(255, 255, 255, .14); }
+.st-card[aria-expanded="true"] .st-plus::before { transform: rotate(45deg); }
+.st-card[aria-expanded="true"] .st-plus::after { transform: rotate(-45deg); }
+.st-card[aria-expanded="true"] .st-plus::before, .st-card[aria-expanded="true"] .st-plus::after { background: var(--surface); }
+
+/* ---------- about ---------- */
+.about {
+  padding-block: 96px 120px; border-top: 1px solid var(--line);
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 72px; align-items: start;
+}
+.about-photo { margin: 0; display: grid; gap: 14px; position: sticky; top: 24px; }
+.about-photo img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; display: block; border-radius: var(--r-lg); background: var(--accent); }
+.about-photo figcaption { display: flex; justify-content: space-between; gap: 12px; padding-top: 14px; border-top: 1px solid var(--line); }
+.about-role { color: var(--ink-50); }
+.about-body { display: grid; gap: 40px; min-width: 0; }
+.about-eyebrow { color: var(--ink-50); }
+.about-lead { margin: -16px 0 0; font: 500 clamp(32px, 3.6vw, 60px)/1 var(--sans); letter-spacing: -.05em; text-wrap: balance; max-width: 18ch; }
+.about-text { display: grid; gap: 16px; max-width: 52ch; }
+.about-text p { margin: 0; font-size: 20px; color: var(--ink-70); }
+.about-facts { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.about-facts div { display: grid; gap: 10px; padding: 20px; background: var(--surface); border-radius: var(--r-md); }
+.about-facts dt { font: 700 clamp(36px, 3.4vw, 56px)/.88 var(--display); letter-spacing: -.05em; }
+.about-facts dd { margin: 0; color: var(--ink-70); }
+.about-skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+.skill-group { display: grid; gap: 14px; align-content: start; }
+.skill-group .eyebrow { color: var(--ink-50); }
+.skill-group ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.skill-group li { padding: 10px 14px; border-radius: var(--r-md); border: 1px solid var(--line); font-size: 15px; }
+
+/* ---------- faq ---------- */
+.faq {
+  padding-block: 96px 120px; border-top: 1px solid var(--line);
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 72px; align-items: start;
+}
+.faq-side { display: grid; gap: 40px; position: sticky; top: 24px; }
+.faq-ask { display: grid; gap: 12px; justify-items: start; padding: 24px; background: var(--surface); border-radius: var(--r-lg); max-width: 420px; }
+.faq-ask p { margin: 0; color: var(--ink-70); }
+.faq-ask .faq-ask-title { color: var(--ink); font: 500 26px/1.1 var(--sans); letter-spacing: -.05em; }
+.faq-ask .btn { margin-top: 8px; }
+.faq-list { border-top: 1px solid var(--line); min-width: 0; }
+.faq-item { border-bottom: 1px solid var(--line); }
+.faq-item summary {
+  list-style: none; cursor: pointer;
+  display: grid; grid-template-columns: minmax(0, 1fr) var(--button-h); align-items: center; gap: 24px;
+  padding-block: 22px;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; border-radius: var(--r-md); }
+.faq-q { font: 500 clamp(20px, 1.8vw, 28px)/1.15 var(--sans); letter-spacing: -.05em; }
+.faq-a { margin: 0; padding: 0 72px 28px 0; font-size: 18px; line-height: 1.35; color: var(--ink-70); max-width: 60ch; }
+.faq-item[open] .svc-toggle { background: var(--ink); }
+.faq-item[open] .svc-toggle::before, .faq-item[open] .svc-toggle::after { background: var(--surface); }
+.faq-item[open] .svc-toggle::after { transform: rotate(0deg); }
+.faq-item summary:hover .svc-toggle { background: var(--surface-2); }
+.faq-item[open] summary:hover .svc-toggle { background: var(--ink); }
+@media (prefers-reduced-motion: no-preference) {
+  .faq-item[open] .faq-a { animation: appear .55s var(--ease) both; }
+}
+
+/* ---------- contact + footer ---------- */
+.contact { container-type: inline-size; padding-block: 96px 120px; border-top: 1px solid var(--line); display: grid; grid-template-columns: minmax(0, 1fr); gap: 48px; }
+.contact-title {
+  margin: 0; white-space: nowrap;
+  font: 700 13.2cqw/.82 var(--display); letter-spacing: -.06em; text-transform: uppercase;
+  margin-left: -.04em;
+}
+.contact-body { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 32px 72px; align-items: start; }
+.contact-text { margin: 0; font: 500 clamp(1.25rem, 1.6vw, 1.5rem)/1.2 var(--sans); letter-spacing: -.05em; max-width: 22ch; }
+.contact-actions { grid-column: 1; }
+.contact-links { grid-column: 2; grid-row: 1 / span 2; list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.contact-links a {
+  display: grid; grid-template-columns: 120px minmax(0, 1fr) var(--button-h); align-items: center; gap: 16px;
+  padding-block: 20px; border-bottom: 1px solid var(--line);
+}
+.contact-links .eyebrow { color: var(--ink-50); }
+.contact-handle { font: 500 clamp(1.5rem, 2.2vw, 2.25rem)/1 var(--display); letter-spacing: -.05em; }
+.contact-arrow {
+  width: var(--button-h); height: var(--button-h); display: grid; place-items: center;
+  border-radius: var(--r-md); background: var(--surface); transition: background .3s var(--ease);
+}
+.contact-arrow svg { width: 18px; height: 18px; transition: transform .3s var(--ease); }
+.contact-links a:hover .contact-arrow { background: var(--ink); color: var(--surface); }
+.contact-links a:hover .contact-arrow svg { transform: translate(2px, -2px); }
+.contact-links a:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; border-radius: var(--r-md); }
+.footer {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px;
+  padding-block: 28px calc(28px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line);
+}
+.footer .brand svg { height: 20px; width: auto; display: block; }
+.footer-copy { color: var(--ink-50); }
+.footer-link { color: var(--ink-70); transition: color .3s var(--ease); }
+.footer-link:hover { color: var(--ink); }
+.footer-top { margin-left: auto; }
+
+/* ---------- motion (brandbook: fade + 14px, .55s, off for reduced motion) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .in { animation: appear .55s var(--ease) both; }
+  .d1 { animation-delay: .08s; } .d2 { animation-delay: .16s; }
+  .d3 { animation-delay: .28s; } .d4 { animation-delay: .38s; }
+}
+@keyframes appear { from { opacity: 0; transform: translateY(14px); } }
+
+/* ---------- tablet / phone ---------- */
+@media (max-width: 899px) {
+  .links { display: none; }
+  .topbar-cta { display: none; }
+  .burger { display: block; }
+  .photo {
+    position: relative; left: auto; top: auto;
+    width: 100%; aspect-ratio: 1 / 1;
+    margin-top: -4cqw;
+  }
+  .photo img { object-position: 50% 62%; }
+  .below { grid-template-columns: 1fr; row-gap: 32px; margin-top: 32px; }
+  .below .spacer { display: none; }
+  .facts { justify-self: stretch; width: 100%; }
+  .work { padding-block: 64px 80px; gap: 64px; }
+  .work-head { grid-template-columns: 1fr; }
+  .work-intro { justify-self: start; }
+  .case-top { grid-template-columns: auto minmax(0, 1fr); }
+  .case-meta { grid-column: 1 / -1; justify-content: flex-start; }
+  .case-info { grid-template-columns: 1fr; gap: 20px; }
+  .case-action { justify-self: start; }
+  .services { padding-block: 64px 80px; gap: 40px; }
+  .svc summary { grid-template-columns: minmax(0, 1fr) var(--button-h); gap: 12px 16px; }
+  .svc-num { grid-column: 1; grid-row: 1; font-size: 18px; }
+  .svc-toggle { grid-column: 2; grid-row: 1; }
+  .svc-name { grid-column: 1 / -1; font-size: min(8vw, 44px); }
+  .svc-price { grid-column: 1 / -1; }
+  .svc-body { grid-template-columns: 1fr; }
+  .svc-body p, .svc-body ul { grid-column: 1; }
+  .process { padding-block: 64px 80px; gap: 40px; }
+  .process-term { justify-self: start; }
+  .about { grid-template-columns: 1fr; gap: 40px; padding-block: 64px 80px; }
+  .about-photo { position: static; }
+  .about-facts, .about-skills { grid-template-columns: 1fr; }
+  .faq { grid-template-columns: 1fr; gap: 40px; padding-block: 64px 80px; }
+  .faq-side { position: static; }
+  .faq-a { padding-right: 0; }
+  .contact { padding-block: 64px 80px; gap: 32px; }
+  .contact-body { grid-template-columns: 1fr; }
+  .contact-links { grid-column: 1; grid-row: auto; }
+  .contact-links a { grid-template-columns: 88px minmax(0, 1fr) var(--button-h); }
+  .contact-actions .btn { width: 100%; }
+  .contact-actions .btn .label { flex: 1; justify-content: center; }
+  .stairs { --cols: 1; border: 0; background: none; gap: 8px; }
+  .st { grid-column: auto !important; grid-row: auto !important; aspect-ratio: auto; padding: 0; }
+  .st-card { min-height: 190px; }
+  .st-card[aria-expanded="true"] .st-text { margin-top: 28px; }
+}
+@media (min-width: 900px) and (max-width: 1199px) {
+  .stairs { --cols: 3; border: 0; background: none; gap: 8px; }
+  .st { grid-column: auto !important; grid-row: auto !important; aspect-ratio: auto; padding: 0; }
+  .st-card { min-height: 200px; }
+}
+@media (max-width: 560px) {
+  .brand .eyebrow { font-size: 11px; }
+  .copy .btn { width: 100%; }
+  .copy .btn .label { flex: 1; justify-content: center; }
+  .shots { grid-template-columns: 1fr; }
+  .shots .shot-mobile { width: 56%; justify-self: center; }
+  .compare-tag { top: 10px; }
+  .compare-tag.is-before { left: 10px; } .compare-tag.is-after { right: 10px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Катерина Качур, на початок">
+      <svg viewBox="71 454 2663 1570" aria-hidden="true"><path id="kk-mark" fill="currentColor" d="M333.18 1673.02V1291.76Q384.1 1229.98 435.29 1168.89Q486.48 1107.8 537.63 1046.75Q588.78 985.7 640.16 924.38L1007.92 494H1377.14L748.16 1220.06H723.5ZM111.28 1984V494H418.72V905.54V1282.56V1429.42V1984ZM1037.24 1984 591.76 1308.64 776.73 1074.84 1392.26 1984Z M1634.78 1673.02V1291.76Q1685.7 1229.98 1736.89 1168.89Q1788.08 1107.8 1839.23 1046.75Q1890.38 985.7 1941.76 924.38L2309.52 494H2678.74L2049.76 1220.06H2025.1ZM1412.88 1984V494H1720.32V905.54V1282.56V1429.42V1984ZM2338.84 1984 1893.36 1308.64 2078.33 1074.84 2693.86 1984Z"/></svg>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="eyebrow">Дизайн і розробка сайтів</span>
+    </a>
+    <nav class="links eyebrow" aria-label="Розділи">
+      <a href="#work">Портфоліо</a>
+      <a href="#services">Послуги</a>
+      <a href="#about">Про мене</a>
+      <a href="#contact">Контакти</a>
+    </nav>
+    <a class="btn btn--ghost topbar-cta" href="#contact">
+      <span class="label">Зв’язатися</span>
+      <span class="arrow" aria-hidden="true"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 13 13 5M6.5 5H13v6.5"/></svg></span>
+    </a>
+    <button class="burger" type="button" aria-label="Відкрити меню" aria-expanded="false" aria-controls="mobileMenu"><i></i><i></i></button>
+  </header>
+
+  <div class="menu" id="mobileMenu" hidden>
+    <nav class="menu-links" aria-label="Меню">
+      <a href="#work"><span>01</span>Портфоліо</a>
+      <a href="#services"><span>02</span>Послуги</a>
+      <a href="#process"><span>03</span>Етапи</a>
+      <a href="#about"><span>04</span>Про мене</a>
+      <a href="#faq"><span>05</span>Питання</a>
+      <a href="#contact"><span>06</span>Контакти</a>
+    </nav>
+    <div class="menu-foot">
+      <a class="btn" href="https://kateriis.github.io/brief/" target="_blank" rel="noopener">
+        <span class="label">Заповнити бриф</span>
+        <span class="arrow" aria-hidden="true"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9h12M10 4l5 5-5 5"/></svg></span>
+      </a>
+      <a class="menu-tg eyebrow" href="https://t.me/kateriis" target="_blank" rel="noopener">Telegram @kateriis</a>
+    </div>
+  </div>
+
+  <main class="hero" id="top">
+    <div class="stage">
+      <h1 class="name" aria-label="Kateryna Kachur">
+        <span class="l1 in">Kateryna</span>
+        <span class="l2 in d1">Kachur</span>
+      </h1>
+
+      <figure class="photo in d2">
+        <img src="assets/photo-intro.webp" alt="Катерина Качур лежить на бруківці й дивиться в камеру" width="1121" height="1403" fetchpriority="high">
+        <figcaption class="eyebrow">Катерина Качур</figcaption>
+      </figure>
+
+      <div class="below">
+        <div class="copy in d3">
+          <span class="eyebrow">Веб-дизайнерка</span>
+          <p class="lead">Вас оцінюють за&nbsp;перші <b>3&nbsp;секунди.</b> Я&nbsp;роблю так, щоб вони працювали на&nbsp;вас.</p>
+          <p class="sub">Дизайн у&nbsp;Figma і&nbsp;розробка у&nbsp;Webflow, Readymag або Claude&nbsp;Code.</p>
+          <a class="btn" href="https://kateriis.github.io/brief/" target="_blank" rel="noopener">
+            <span class="label">Заповнити бриф</span>
+            <span class="arrow" aria-hidden="true"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9h12M10 4l5 5-5 5"/></svg></span>
+          </a>
+        </div>
+
+        <div class="spacer" aria-hidden="true"></div>
+
+        <ul class="facts in d4">
+          <li class="fact"><strong>100%</strong><span>авторський дизайн без шаблонів</span></li>
+          <li class="fact"><strong>Figma → сайт</strong><span>Webflow, Readymag, Claude Code</span></li>
+          <li class="fact"><strong>Telegram</strong><span>заявки з сайту приходять одразу вам</span></li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <section class="work" id="work" aria-labelledby="workTitle">
+    <header class="work-head">
+      <div class="work-title">
+        <span class="eyebrow">Портфоліо</span>
+        <h2 id="workTitle">Вибрані проєкти</h2>
+      </div>
+    </header>
+
+    <!-- 01 Speakeasy: before / after -->
+    <article class="case">
+      <div class="case-top">
+        <span class="case-num">01</span>
+        <h3 class="case-name">Speakeasy</h3>
+        <p class="case-meta eyebrow">Онлайн-школа іноземних мов <i></i> Readymag <i></i> Редизайн</p>
+      </div>
+
+      <div class="compare" style="--pos: 50%">
+        <img src="assets/cases/speakeasy-new-desktop.jpg" alt="Новий перший екран сайту Speakeasy" width="2000" height="1250" loading="lazy">
+        <div class="compare-before">
+          <img src="assets/cases/speakeasy-old-desktop.jpg" alt="Перша версія сайту Speakeasy" width="2000" height="1250" loading="lazy">
+        </div>
+        <span class="compare-tag eyebrow is-before">Було</span>
+        <span class="compare-tag eyebrow is-after">Стало</span>
+        <span class="compare-handle" aria-hidden="true">
+          <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 5 3 9l4 4M11 5l4 4-4 4"/></svg>
+        </span>
+        <label class="sr" for="compareRange">Порівняти першу версію і редизайн</label>
+        <input id="compareRange" class="compare-range" type="range" min="0" max="100" value="50">
+      </div>
+
+      <div class="case-info">
+        <p class="case-text">Спершу я зробила для школи перший сайт, а&nbsp;згодом клієнт повернувся по&nbsp;редизайн. Прибрала зайвий декор, додала живі фото учнів і&nbsp;залишила одну головну дію: записатися на&nbsp;пробне заняття.</p>
+        <p class="case-fact"><strong>2</strong><span>версії сайту для одного клієнта</span></p>
+        <a class="btn case-action" href="https://speakeasyengschool.com" target="_blank" rel="noopener">
+          <span class="label">Перейти на сайт</span>
+          <span class="arrow" aria-hidden="true"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 13 13 5M6.5 5H13v6.5"/></svg></span>
+        </a>
+      </div>
+    </article>
+
+    <!-- 02 DE.SI Studio -->
+    <article class="case">
+      <div class="case-top">
+        <span class="case-num">02</span>
+        <h3 class="case-name">DE.SI Studio</h3>
+        <p class="case-meta eyebrow">Студія дизайну інтер’єрів <i></i> Readymag</p>
+      </div>
+      <div class="shots">
+        <img class="shot-desktop" src="assets/cases/desi-desktop.jpg" alt="Перший екран сайту DE.SI Studio на комп’ютері" width="2000" height="1250" loading="lazy">
+        <img class="shot-mobile" src="assets/cases/desi-mobile.jpg" alt="Перший екран сайту DE.SI Studio на телефоні" width="780" height="1688" loading="lazy">
+      </div>
+      <div class="case-info">
+        <p class="case-text">Сайт двох дизайнерок, які працюють віддалено по&nbsp;всій Україні. Спокійна мінімалістична подача, щоб головними були інтер’єри.</p>
+        <blockquote class="quote">
+          <p>«Ми швидко знайшли спільну мову і&nbsp;практично відразу затвердили сайт»</p>
+          <cite>DE.SI Studio</cite>
+        </blockquote>
+        <span class="case-status eyebrow">Реалізований проєкт</span>
+      </div>
+    </article>
+
+    <!-- 03 AK School -->
+    <article class="case">
+      <div class="case-top">
+        <span class="case-num">03</span>
+        <h3 class="case-name">AK School</h3>
+        <p class="case-meta eyebrow">Школа англійської мови <i></i> Readymag <i></i> Дизайн і тексти</p>
+      </div>
+      <div class="shots">
+        <img class="shot-desktop" src="assets/cases/ak-desktop.jpg" alt="Перший екран сайту AK School на комп’ютері" width="2000" height="1250" loading="lazy">
+        <img class="shot-mobile" src="assets/cases/ak-mobile.jpg" alt="Перший екран сайту AK School на телефоні" width="780" height="1688" loading="lazy">
+      </div>
+      <div class="case-info">
+        <p class="case-text">Сайт школи з&nbsp;двома напрямками: для студентів і&nbsp;для викладачів. Команда, відгуки, безкоштовні ресурси й&nbsp;запис на&nbsp;перше заняття. Тексти для сайту теж написала я.</p>
+        <blockquote class="quote">
+          <p>«Цей сайт вийшов в&nbsp;1000 разів краще, ніж я&nbsp;представляла»</p>
+          <cite>AK School</cite>
+        </blockquote>
+        <span class="case-status eyebrow">Реалізований проєкт</span>
+      </div>
+    </article>
+  </section>
+
+  <section class="services" id="services" aria-labelledby="servicesTitle">
+    <header class="work-head">
+      <div class="work-title">
+        <span class="eyebrow">Вартість</span>
+        <h2 id="servicesTitle">Послуги і&nbsp;ціни</h2>
+      </div>
+      <p class="work-intro">Беру проєкт цілком: від аналізу ніші до&nbsp;запуску сайту.</p>
+    </header>
+
+    <div class="svc-list">
+      <details class="svc">
+        <summary>
+          <span class="svc-num">01</span>
+          <span class="svc-name">Лендинг</span>
+          <span class="svc-price">від $300</span>
+          <span class="svc-toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="svc-body">
+          <p>Одна сторінка під одну задачу: продати курс, послугу чи&nbsp;запуск.</p>
+          <ul>
+            <li>Аналіз ніші, аудиторії й&nbsp;конкурентів</li>
+            <li>Структура і прототип, тексти за&nbsp;домовленістю</li>
+            <li>Мудборд, палітра й&nbsp;шрифти</li>
+            <li>Дизайн у&nbsp;Figma для комп’ютера, планшета й&nbsp;телефона</li>
+            <li>Розробка у&nbsp;Webflow, Readymag або Claude&nbsp;Code</li>
+            <li>Домен, оплата через WayForPay, базове SEO й&nbsp;заявки в&nbsp;Telegram</li>
+            <li>Інструкція, як оновлювати сайт</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="svc">
+        <summary>
+          <span class="svc-num">02</span>
+          <span class="svc-name">Багатосторінковий сайт</span>
+          <span class="svc-price">від $600</span>
+          <span class="svc-toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="svc-body">
+          <p>Сайт компанії, школи чи студії: послуги, команда, відгуки й&nbsp;окремі сторінки під кожен напрямок.</p>
+          <ul>
+            <li>Аналіз ніші, аудиторії й&nbsp;конкурентів</li>
+            <li>Структура і прототип, тексти за&nbsp;домовленістю</li>
+            <li>Мудборд, палітра й&nbsp;шрифти</li>
+            <li>Дизайн усіх сторінок і&nbsp;поп-апів для комп’ютера, планшета й&nbsp;телефона</li>
+            <li>Розробка у&nbsp;Webflow, Readymag або Claude&nbsp;Code</li>
+            <li>Домен, оплата через WayForPay, базове SEO й&nbsp;заявки в&nbsp;Telegram</li>
+            <li>Інструкція, як оновлювати сайт</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="svc">
+        <summary>
+          <span class="svc-num">03</span>
+          <span class="svc-name">Редизайн</span>
+          <span class="svc-price">від $250</span>
+          <span class="svc-toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="svc-body">
+          <p>Оновлення сайту, який уже є: сучасний вигляд, зрозуміла структура й&nbsp;одна головна дія. Як&nbsp;у&nbsp;кейсі Speakeasy.</p>
+          <ul>
+            <li>Розбір нинішнього сайту: що заважає заявкам</li>
+            <li>Аналіз конкурентів</li>
+            <li>Новий дизайн ключових сторінок</li>
+            <li>Оновлення текстів за&nbsp;домовленістю</li>
+            <li>Розробка у&nbsp;Webflow, Readymag або Claude&nbsp;Code</li>
+            <li>Інструкція, як оновлювати сайт</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="svc-foot">
+      <p>Точну вартість назву після брифу: вона залежить від кількості блоків, анімацій і&nbsp;текстів.</p>
+      <a class="btn" href="https://kateriis.github.io/brief/" target="_blank" rel="noopener">
+        <span class="label">Заповнити бриф</span>
+        <span class="arrow" aria-hidden="true"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9h12M10 4l5 5-5 5"/></svg></span>
+      </a>
+    </div>
+  </section>
+
+  <section class="process" id="process" aria-labelledby="processTitle">
+    <header class="work-head">
+      <div class="work-title">
+        <span class="eyebrow">Як я працюю</span>
+        <h2 id="processTitle">Етапи роботи</h2>
+      </div>
+      <p class="process-term"><strong>3–4 тижні</strong><span>зазвичай займає лендинг від брифу до&nbsp;запуску</span></p>
+    </header>
+
+    <p class="st-hint"><span class="st-plus st-plus--mini" aria-hidden="true"></span>Натисніть на картку, щоб дізнатися більше</p>
+    <ol class="stairs">
+      <li class="st st--1">
+        <button class="st-card" type="button" aria-expanded="false" aria-controls="st01">
+          <span class="st-num">(01)</span>
+          <span class="st-title">Бриф</span>
+          <span class="st-text" id="st01">Заповнюєте бриф або созвонюємося: цілі, обсяг роботи, стиль, терміни й&nbsp;бюджет. Після цього надсилаю комерційну пропозицію.</span>
+          <span class="st-plus" aria-hidden="true"></span>
+        </button>
+      </li>
+      <li class="st st--2">
+        <button class="st-card" type="button" aria-expanded="false" aria-controls="st02">
+          <span class="st-num">(02)</span>
+          <span class="st-title">Аналіз</span>
+          <span class="st-text" id="st02">Вивчаю нішу, вашу аудиторію й&nbsp;конкурентів, щоб зрозуміти, на&nbsp;чому зробити акцент і&nbsp;чим вирізнитися.</span>
+          <span class="st-plus" aria-hidden="true"></span>
+        </button>
+      </li>
+      <li class="st st--3">
+        <button class="st-card" type="button" aria-expanded="false" aria-controls="st03">
+          <span class="st-num">(03)</span>
+          <span class="st-title">Прототип</span>
+          <span class="st-text" id="st03">Складаю структуру сайту, за&nbsp;домовленістю пишу тексти й&nbsp;збираю вайрфрейм: що й&nbsp;де стоїть на&nbsp;кожній сторінці.</span>
+          <span class="st-plus" aria-hidden="true"></span>
+        </button>
+      </li>
+      <li class="st st--4">
+        <button class="st-card" type="button" aria-expanded="false" aria-controls="st04">
+          <span class="st-num">(04)</span>
+          <span class="st-title">Мудборд</span>
+          <span class="st-text" id="st04">Підбираю референси, палітру й&nbsp;шрифтову пару, щоб ми погодили настрій сайту ще до&nbsp;дизайну.</span>
+          <span class="st-plus" aria-hidden="true"></span>
+        </button>
+      </li>
+      <li class="st st--5">
+        <button class="st-card" type="button" aria-expanded="false" aria-controls="st05">
+          <span class="st-num">(05)</span>
+          <span class="st-title">Дизайн</span>
+          <span class="st-text" id="st05">Показую 3&nbsp;варіанти першого екрана. Після вибору малюю всю сторінку для комп’ютера, планшета й&nbsp;телефона.</span>
+          <span class="st-plus" aria-hidden="true"></span>
+        </button>
+      </li>
+      <li class="st st--6">
+        <button class="st-card" type="button" aria-expanded="false" aria-controls="st06">
+          <span class="st-num">(06)</span>
+          <span class="st-title">Запуск</span>
+          <span class="st-text" id="st06">Збираю сайт у&nbsp;Webflow, Readymag або Claude&nbsp;Code, додаю анімацію, домен, оплату через WayForPay і&nbsp;базове SEO. Тестую й&nbsp;передаю з&nbsp;інструкцією.</span>
+          <span class="st-plus" aria-hidden="true"></span>
+        </button>
+      </li>
+    </ol>
+  </section>
+
+  <section class="about" id="about" aria-labelledby="aboutTitle">
+    <figure class="about-photo">
+      <img src="assets/about.jpg" alt="Катерина Качур за робочим столом" width="960" height="1200" loading="lazy">
+      <figcaption>
+        <span class="eyebrow">Катерина Качур</span>
+        <span class="eyebrow about-role">Веб-дизайнерка</span>
+      </figcaption>
+    </figure>
+
+    <div class="about-body">
+      <span class="eyebrow about-eyebrow">Про мене</span>
+      <h2 id="aboutTitle" class="about-lead">Гарний сайт важливий. Але&nbsp;головне, щоб він приводив вам клієнтів.</h2>
+      <div class="about-text">
+        <p>Мене звати Катерина. Я&nbsp;у&nbsp;дизайні з&nbsp;2023 року: прийшла у&nbsp;професію після курсу веб-дизайну й&nbsp;відтоді роблю сайти для шкіл, студій та&nbsp;експертів з&nbsp;України та&nbsp;Європи.</p>
+        <p>Для мене сайт&nbsp;— це інструмент. Тому я&nbsp;спершу розбираюся в&nbsp;задачі вашого бізнесу й&nbsp;аудиторії, а&nbsp;вже потім підбираю стиль.</p>
+      </div>
+
+      <dl class="about-facts">
+        <div><dt>2023</dt><dd>рік, з&nbsp;якого я&nbsp;у&nbsp;дизайні</dd></div>
+        <div><dt>UA + EU</dt><dd>клієнти з&nbsp;України та&nbsp;Європи</dd></div>
+      </dl>
+
+      <div class="about-skills">
+        <div class="skill-group">
+          <span class="eyebrow">Навички</span>
+          <ul>
+            <li>Веб-дизайн</li><li>UX-структура</li><li>Копірайтинг</li><li>Адаптив</li><li>Анімація</li><li>Базове SEO</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <span class="eyebrow">Інструменти</span>
+          <ul>
+            <li>Figma</li><li>Readymag</li><li>Webflow</li><li>Claude Code</li><li>WayForPay</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq" aria-labelledby="faqTitle">
+    <div class="faq-side">
+      <div class="work-title">
+        <span class="eyebrow">Питання</span>
+        <h2 id="faqTitle">Часті питання</h2>
+      </div>
+      <div class="faq-ask">
+        <p class="faq-ask-title">Не знайшли відповіді?</p>
+        <p>Напишіть мені в&nbsp;Telegram, і&nbsp;я&nbsp;відповім особисто.</p>
+        <a class="btn" href="https://t.me/kateriis" target="_blank" rel="noopener">
+          <span class="label">Написати в Telegram</span>
+          <span class="arrow" aria-hidden="true"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 13 13 5M6.5 5H13v6.5"/></svg></span>
+        </a>
+      </div>
+    </div>
+    <div class="faq-list">
+        <details class="faq-item" name="faq">
+          <summary><span class="faq-q">З чого почати?</span><span class="svc-toggle faq-toggle" aria-hidden="true"></span></summary>
+          <p class="faq-a">Заповніть бриф: це займе близько 15&nbsp;хвилин. Я прочитаю його за&nbsp;1–2 робочих дні, напишу вам і&nbsp;запропоную короткий дзвінок. Після дзвінка надішлю пропозицію з&nbsp;етапами, термінами й&nbsp;вартістю.</p>
+        </details>
+        <details class="faq-item" name="faq">
+          <summary><span class="faq-q">Скільки триває робота?</span><span class="svc-toggle faq-toggle" aria-hidden="true"></span></summary>
+          <p class="faq-a">Лендинг зазвичай займає 3–4 тижні, багатосторінковий сайт довше: залежно від кількості сторінок. Точні терміни називаю в&nbsp;пропозиції й&nbsp;рахую в&nbsp;робочих днях. Якщо матеріали чи відповіді затримуються, терміни зсуваються на&nbsp;стільки ж.</p>
+        </details>
+        <details class="faq-item" name="faq">
+          <summary><span class="faq-q">Що, якщо мені не сподобається дизайн?</span><span class="svc-toggle faq-toggle" aria-hidden="true"></span></summary>
+          <p class="faq-a">Ще до&nbsp;дизайну ми погоджуємо мудборд: референси, палітру й&nbsp;шрифти. Потім я&nbsp;показую 3&nbsp;варіанти першого екрана, ви обираєте один, і&nbsp;лише після цього я&nbsp;малюю всю сторінку.</p>
+        </details>
+        <details class="faq-item" name="faq">
+          <summary><span class="faq-q">У мене немає текстів і фото. Як бути?</span><span class="svc-toggle faq-toggle" aria-hidden="true"></span></summary>
+          <p class="faq-a">Структуру сайту я&nbsp;продумую в&nbsp;будь-якому разі, а&nbsp;тексти можу написати за&nbsp;домовленістю. Фото й&nbsp;відео надаєте ви, а&nbsp;за&nbsp;потреби я&nbsp;допоможу підібрати матеріали зі&nbsp;стоків або згенерую фото за&nbsp;допомогою нейромережі.</p>
+        </details>
+        <details class="faq-item" name="faq">
+          <summary><span class="faq-q">Чи зможу я сам вносити зміни на сайт?</span><span class="svc-toggle faq-toggle" aria-hidden="true"></span></summary>
+          <p class="faq-a">Так. Після запуску я&nbsp;передаю інструкцію, як оновлювати тексти, фото й&nbsp;ціни.</p>
+        </details>
+        <details class="faq-item" name="faq">
+          <summary><span class="faq-q">Що не входить у вартість?</span><span class="svc-toggle faq-toggle" aria-hidden="true"></span></summary>
+          <p class="faq-a">Окремо оплачуються домен, тариф на&nbsp;платформі (Readymag або Webflow) і&nbsp;платні матеріали, наприклад фото зі&nbsp;стоків, якщо вони потрібні.</p>
+        </details>
+        <details class="faq-item" name="faq">
+          <summary><span class="faq-q">Чи підтримуєте сайт після запуску?</span><span class="svc-toggle faq-toggle" aria-hidden="true"></span></summary>
+          <p class="faq-a">Так. Протягом місяця після запуску я&nbsp;на&nbsp;зв’язку: відповідаю на&nbsp;питання й&nbsp;допомагаю, якщо щось працює не&nbsp;так.</p>
+        </details>
+        <details class="faq-item" name="faq">
+          <summary><span class="faq-q">Ви працюєте лише з однією платформою?</span><span class="svc-toggle faq-toggle" aria-hidden="true"></span></summary>
+          <p class="faq-a">Ні. Я&nbsp;роблю сайти в&nbsp;Readymag, Webflow і&nbsp;Claude Code. Яку обрати, підкажу на&nbsp;дзвінку: це залежить від задачі, бюджету й&nbsp;того, як ви плануєте оновлювати сайт.</p>
+        </details>
+    </div>
+  </section>
+  <section class="contact" id="contact" aria-labelledby="contactTitle">
+    <div class="contact-head">
+      <h2 id="contactTitle" class="contact-title">Тепер ваш хід</h2>
+    </div>
+    <div class="contact-body">
+      <p class="contact-text">Свій я&nbsp;вже зробила: показала роботи, ціни й&nbsp;етапи. Розкажіть про свій проєкт, і&nbsp;почнемо.</p>
+      <div class="contact-actions">
+        <a class="btn" href="https://kateriis.github.io/brief/" target="_blank" rel="noopener">
+          <span class="label">Заповнити бриф</span>
+          <span class="arrow" aria-hidden="true"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9h12M10 4l5 5-5 5"/></svg></span>
+        </a>
+      </div>
+      <ul class="contact-links">
+        <li><a href="https://t.me/kateriis" target="_blank" rel="noopener"><span class="eyebrow">Telegram</span><span class="contact-handle">@kateriis</span><span class="contact-arrow" aria-hidden="true"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 13 13 5M6.5 5H13v6.5"/></svg></span></a></li>
+        <li><a href="https://instagram.com/kateriis" target="_blank" rel="noopener"><span class="eyebrow">Instagram</span><span class="contact-handle">@kateriis</span><span class="contact-arrow" aria-hidden="true"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 13 13 5M6.5 5H13v6.5"/></svg></span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <a class="brand" href="#top" aria-label="Катерина Качур, на початок">
+      <svg viewBox="71 454 2663 1570" aria-hidden="true"><use href="#kk-mark"></use></svg>
+    </a>
+    <span class="eyebrow footer-copy">© 2026 Катерина Качур</span>
+    <a class="eyebrow footer-link" href="https://kateriis.github.io/brief/privacy.html" target="_blank" rel="noopener">Політика конфіденційності</a>
+    <a class="eyebrow footer-link footer-top" href="#top">Нагору ↑</a>
+  </footer>
+</div>
+
+<script>
+// Before / after slider: the range input drives the split position.
+document.querySelectorAll('.compare').forEach(box => {
+  const range = box.querySelector('.compare-range');
+  const set = () => box.style.setProperty('--pos', range.value + '%');
+  range.addEventListener('input', set);
+  set();
+});
+</script>
+
+<script>
+// Stage cards: click toggles the description inside the card.
+document.querySelectorAll('.st-card').forEach(card => {
+  card.addEventListener('click', () => {
+    card.setAttribute('aria-expanded', card.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+  });
+});
+</script>
+
+<script>
+// Mobile menu: burger toggles the full-screen panel; links and Esc close it.
+(() => {
+  const btn = document.querySelector('.burger');
+  const menu = document.getElementById('mobileMenu');
+  const set = open => {
+    menu.hidden = !open;
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Закрити меню' : 'Відкрити меню');
+    document.body.classList.toggle('menu-open', open);
+  };
+  btn.addEventListener('click', () => set(menu.hidden));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => set(false)));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && !menu.hidden) { set(false); btn.focus(); } });
+  matchMedia('(min-width: 900px)').addEventListener('change', e => { if (e.matches) set(false); });
+})();
+
+// FAQ: opening one question closes the others (fallback for browsers without details[name]).
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.addEventListener('toggle', () => {
+    if (!item.open) return;
+    document.querySelectorAll('.faq-item[open]').forEach(other => { if (other !== item) other.open = false; });
+  });
+});
+</script>
+</body>
+</html>
