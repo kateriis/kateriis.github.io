@@ -3,10 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Катерина Качур — веб-дизайнерка</title>
+<title>Катерина Качур — веб-дизайнерка | Сайти у Webflow та Readymag</title>
 <meta name="description" content="Катерина Качур — веб-дизайнерка. Дизайн у Figma і розробка сайтів у Webflow, Readymag або Claude Code: лендинги, багатосторінкові сайти й редизайн.">
 <link rel="canonical" href="https://kateriis.github.io/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="Катерина Качур">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="sitemap" type="application/xml" href="sitemap.xml">
+<link rel="preload" as="image" href="assets/photo-intro.webp" fetchpriority="high">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/Inter-cyrillic.woff2" crossorigin>
+<meta property="og:site_name" content="Катерина Качур">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="uk_UA">
 <meta property="og:title" content="Катерина Качур — веб-дизайнерка">
@@ -17,6 +24,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#eaeaea">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://kateriis.github.io/#website", "url": "https://kateriis.github.io/", "name": "Катерина Качур", "inLanguage": "uk"}, {"@type": "Person", "@id": "https://kateriis.github.io/#person", "name": "Катерина Качур", "alternateName": "Kateryna Kachur", "jobTitle": "Веб-дизайнерка", "url": "https://kateriis.github.io/", "image": "https://kateriis.github.io/assets/about.jpg", "sameAs": ["https://instagram.com/kateriis", "https://t.me/kateriis"], "knowsAbout": ["Веб-дизайн", "UX-структура", "Копірайтинг", "Figma", "Webflow", "Readymag", "Claude Code"]}, {"@type": "ProfessionalService", "@id": "https://kateriis.github.io/#service", "name": "Катерина Качур — дизайн і розробка сайтів", "url": "https://kateriis.github.io/", "image": "https://kateriis.github.io/og.jpg", "founder": {"@id": "https://kateriis.github.io/#person"}, "priceRange": "$250–$600+", "areaServed": ["Україна", "Європа"], "makesOffer": [{"@type": "Offer", "name": "Лендинг", "priceSpecification": {"@type": "PriceSpecification", "minPrice": 300, "priceCurrency": "USD"}}, {"@type": "Offer", "name": "Багатосторінковий сайт", "priceSpecification": {"@type": "PriceSpecification", "minPrice": 600, "priceCurrency": "USD"}}, {"@type": "Offer", "name": "Редизайн сайту", "priceSpecification": {"@type": "PriceSpecification", "minPrice": 250, "priceCurrency": "USD"}}]}]}</script>
 <style>
 @font-face {
   font-family: 'Inter';
@@ -203,8 +211,9 @@ body.menu-open { overflow: hidden; }
 .topbar {
   position: sticky; top: env(safe-area-inset-top, 0px); z-index: 31;
   background: var(--bg);
-  box-shadow: 0 0 0 100vmax var(--bg); clip-path: inset(0 -100vmax);
 }
+/* Full-bleed backdrop behind the sticky header (no giant shadows: Safari can paint them over the page). */
+.topbar::before { content: ""; position: absolute; top: 0; bottom: 0; left: calc(50% - 50vw); right: calc(50% - 50vw); background: var(--bg); z-index: -1; pointer-events: none; }
 html { scroll-padding-top: 1.75rem; }
 @media (max-width: 899px) { html { scroll-padding-top: 3.625rem; } }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
@@ -670,9 +679,11 @@ html.anim .scrub-w.on { color: var(--ink); }
     </div>
   </div>
 
-  <main class="hero" id="top">
+  <main id="main">
+  <section class="hero" id="top">
     <div class="stage">
-      <h1 class="name" aria-label="Kateryna Kachur">
+      <h1 class="name" aria-label="Катерина Качур (Kateryna Kachur) — веб-дизайнерка">
+        <span class="sr">Катерина Качур — веб-дизайнерка, дизайн і розробка сайтів</span>
         <span class="l1 in">Kateryna</span>
         <span class="l2 in d1">Kachur</span>
       </h1>
@@ -702,7 +713,7 @@ html.anim .scrub-w.on { color: var(--ink); }
         </ul>
       </div>
     </div>
-  </main>
+  </section>
 
   <section class="work" id="work" aria-labelledby="workTitle">
     <header class="work-head">
@@ -1038,6 +1049,8 @@ html.anim .scrub-w.on { color: var(--ink); }
       </ul>
     </div>
   </section>
+
+  </main>
 
   <footer class="footer">
     <a class="brand" href="#top" aria-label="Катерина Качур, на початок">
