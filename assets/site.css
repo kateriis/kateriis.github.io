@@ -233,6 +233,8 @@ html { scroll-padding-top: 1.75rem; }
 .case-meta i { width: 1px; height: 12px; background: var(--line); }
 
 .shots { display: grid; grid-template-columns: 1.6fr .462fr; gap: 8px; }
+.shots--single { grid-template-columns: 1fr; }
+.shots--single img { aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
 .shots img { width: 100%; height: auto; display: block; border-radius: var(--r-lg); background: var(--surface); }
 
 .compare { position: relative; border-radius: var(--r-lg); overflow: hidden; aspect-ratio: 16 / 10; max-width: 100%; background: var(--surface); }

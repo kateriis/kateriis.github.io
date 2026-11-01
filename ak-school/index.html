@@ -323,11 +323,11 @@ html[lang="en"] .case-review p:last-of-type::after { content: "”"; }
     buttons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
   };
   let saved = null;
-  try { saved = localStorage.getItem('lang'); } catch (e) {}
+  try { saved = sessionStorage.getItem('lang'); } catch (e) {}
   if (saved === 'en') apply('en');
   buttons.forEach(b => b.addEventListener('click', () => {
     apply(b.dataset.lang);
-    try { localStorage.setItem('lang', b.dataset.lang); } catch (e) {}
+    try { sessionStorage.setItem('lang', b.dataset.lang); } catch (e) {}
   }));
 })();
 </script>

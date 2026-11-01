@@ -339,6 +339,8 @@ html { scroll-padding-top: 1.75rem; }
 .case-meta i { width: 1px; height: 12px; background: var(--line); }
 
 .shots { display: grid; grid-template-columns: 1.6fr .462fr; gap: 8px; }
+.shots--single { grid-template-columns: 1fr; }
+.shots--single img { aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
 .shots img { width: 100%; height: auto; display: block; border-radius: var(--r-lg); background: var(--surface); }
 
 .compare { position: relative; border-radius: var(--r-lg); overflow: hidden; aspect-ratio: 16 / 10; max-width: 100%; background: var(--surface); }
@@ -779,9 +781,8 @@ html.anim .scrub-w.on { color: var(--ink); }
         <h3 class="case-name">DE.SI Studio</h3>
         <p class="case-meta eyebrow">Студія дизайну інтер’єрів <i></i> Readymag</p>
       </div>
-      <div class="shots">
+      <div class="shots shots--single">
         <img class="shot-desktop" src="assets/cases/desi-desktop.jpg" alt="Перший екран сайту DE.SI Studio на комп’ютері" width="2000" height="1250" loading="lazy">
-        <img class="shot-mobile" src="assets/cases/desi-mobile.jpg" alt="Перший екран сайту DE.SI Studio на телефоні" width="780" height="1688" loading="lazy">
       </div>
       <div class="case-info">
         <p class="case-text">Сайт двох дизайнерок, які працюють віддалено по&nbsp;всій Україні. Спокійна мінімалістична подача, щоб головними були інтер’єри.</p>
@@ -803,9 +804,8 @@ html.anim .scrub-w.on { color: var(--ink); }
         <h3 class="case-name">AK School</h3>
         <p class="case-meta eyebrow">Школа англійської мови <i></i> Readymag <i></i> Дизайн і тексти</p>
       </div>
-      <div class="shots">
+      <div class="shots shots--single">
         <img class="shot-desktop" src="assets/cases/ak-desktop.jpg" alt="Перший екран сайту AK School на комп’ютері" width="2000" height="1250" loading="lazy">
-        <img class="shot-mobile" src="assets/cases/ak-mobile.jpg" alt="Перший екран сайту AK School на телефоні" width="780" height="1688" loading="lazy">
       </div>
       <div class="case-info">
         <p class="case-text">Сайт школи з&nbsp;двома напрямками: для студентів і&nbsp;для викладачів. Команда, відгуки, безкоштовні ресурси й&nbsp;запис на&nbsp;перше заняття. З&nbsp;текстами теж допомагала я.</p>
@@ -1173,11 +1173,11 @@ document.querySelectorAll('.faq-item').forEach(item => {
     buttons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
   };
   let saved = null;
-  try { saved = localStorage.getItem('lang'); } catch (e) {}
+  try { saved = sessionStorage.getItem('lang'); } catch (e) {}
   if (saved === 'en') apply('en');
   buttons.forEach(b => b.addEventListener('click', () => {
     apply(b.dataset.lang);
-    try { localStorage.setItem('lang', b.dataset.lang); } catch (e) {}
+    try { sessionStorage.setItem('lang', b.dataset.lang); } catch (e) {}
   }));
 })();
 </script>
