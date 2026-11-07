@@ -452,6 +452,48 @@ document.querySelectorAll('.faq-item').forEach(item => {
 document.addEventListener('touchstart', () => {}, { passive: true });
 </script>
 <script>
+// Intro (once per visit): bars fill to 100% while the name sits at the bottom, then the name slides into the hero.
+(() => {
+  const root = document.documentElement, loader = document.querySelector('.loader');
+  if (!loader || !root.classList.contains('kk-intro')) return;
+  const name = document.querySelector('.hero .name');
+  const place = () => {
+    root.style.setProperty('--intro-y', '0px');
+    const r = name.getBoundingClientRect();
+    root.style.setProperty('--intro-y', Math.max(0, innerHeight - 24 - r.bottom) + 'px');
+  };
+  place();
+  const bars = loader.querySelector('.loader-bars'), num = loader.querySelector('.loader-num');
+  const count = innerWidth < 600 ? 32 : 72;
+  bars.innerHTML = '<i></i>'.repeat(count);
+  const cells = bars.children;
+  let loaded = document.readyState === 'complete';
+  addEventListener('load', () => { loaded = true; });
+  const t0 = performance.now(), minTime = 1600;
+  let shown = 0, done = false;
+  const finish = () => {
+    if (done) return; done = true;
+    try { sessionStorage.setItem('kk-intro', '1'); } catch (e) {}
+    root.classList.add('kk-out');
+    setTimeout(() => { root.classList.remove('kk-intro', 'kk-out'); root.style.removeProperty('--intro-y'); loader.remove(); }, 1000);
+  };
+  const tick = now => {
+    const k = Math.min(1, (now - t0) / minTime);
+    const target = loaded ? k : Math.min(k, .9);
+    const p = Math.round(target * 100);
+    if (p > shown) {
+      shown = p; num.textContent = p + '%';
+      const on = Math.round(target * count);
+      for (let i = 0; i < count; i++) cells[i].classList.toggle('on', i < on);
+    }
+    if (target >= 1) setTimeout(finish, 250); else requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+  addEventListener('resize', () => { if (!done) place(); });
+  setTimeout(finish, 6000);
+})();
+</script>
+<script>
 // Page tabs: swap the desktop and phone screenshots together and scroll both back to the top.
 document.querySelectorAll('.page-tabs button').forEach(b => b.addEventListener('click', () => {
   const show = b.closest('.showcase'), fig = b.closest('.frame');

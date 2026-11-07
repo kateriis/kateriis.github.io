@@ -457,6 +457,26 @@ html[lang="en"] .contact-title { font-size: 12cqw; }
 .footer-link:hover { color: var(--ink); }
 .footer-top { margin-left: auto; }
 
+/* ---------- intro: loader bar on top, name rises from the bottom, then moves into the hero ---------- */
+.loader { display: none; }
+html.kk-intro .loader {
+  position: fixed; z-index: 100; top: 0; left: 0; right: 0; display: flex; align-items: center; gap: 16px;
+  padding: calc(24px + env(safe-area-inset-top, 0px)) max(var(--gutter), env(safe-area-inset-right, 0px)) 0 max(var(--gutter), env(safe-area-inset-left, 0px));
+  transition: opacity .5s var(--ease);
+}
+.loader-bars { flex: 1; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 3px; height: 22px; }
+.loader-bars i { background: var(--line); border-radius: 1px; transition: background .2s linear; }
+.loader-bars i.on { background: var(--ink); }
+.loader-num { min-width: 4ch; text-align: right; font: 500 13px/1 var(--tight); letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+html.kk-intro.kk-out .loader { opacity: 0; }
+html.kk-intro body { overflow: hidden; }
+html.kk-intro .topbar, html.kk-intro .photo, html.kk-intro .copy, html.kk-intro .facts { opacity: 0; }
+html.kk-intro .topbar, html.kk-intro .photo, html.kk-intro .copy, html.kk-intro .facts, html.kk-intro .hero ~ * { visibility: hidden; }
+html.kk-intro .in:not(.name span), html.kk-intro .photo img { animation-play-state: paused; }
+html.kk-intro .name { transform: translateY(var(--intro-y, 0px)); }
+html.kk-intro.kk-out .name { transform: none; transition: transform 1s cubic-bezier(.65, 0, .35, 1); }
+.topbar { transition: opacity .6s var(--ease); }
+
 /* ---------- motion layer (html.anim is set only when motion is allowed) ---------- */
 @keyframes photoIn { from { opacity: 0; filter: blur(22px); transform: scale(1.07); } }
 html.anim .photo img { animation: photoIn 1.5s var(--ease) .15s both; }
